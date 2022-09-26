@@ -1,4 +1,5 @@
 from update import updateStudentDetails, updateStudentMarks
+from delete import delete
 from create_RC import RC
 from sign_up_in import signup, signin
 from add_stud import AddStudDetails, AddStudSubMarksDeatils
@@ -14,10 +15,11 @@ while cond == False:
         userName, teacher_of = signup(mydb, cursor)
         cond = True
     else:
-        cond = signin(cursor)
+        cond, userName, teacher_of = signin(cursor)
+        userName = ''.join(userName.split())
 if cond:
     while True:
-        choice = int(input("You can do the following here:::\n1. Add new record of Student\n2. Update record of Student\n3. Add subject details of student a create report card.\n4. View the Report of a Student.\n5. Log Out\nEnter Your choice... ", end=''))
+        choice = int(input("You can do the following here:::\n1. Add new record of Student\n2. Update record of Student\n3. Add subject details of student a create report card.\n4. View the Report of a Student.\n5. Delete Student record\n6. Log Out\nEnter Your choice: "))
         if choice == 1:
             AddStudDetails(mydb, cursor, userName+teacher_of)
         elif choice == 2:
@@ -36,11 +38,14 @@ if cond:
                 stdID = input("Enter Student Unique ID: ")
                 updateStudentMarks(mydb, cursor, stdID)
         elif choice == 3:
-            stdID = input("Enter Student's Unique ID")
+            stdID = input("Enter Student's Unique ID: ")
             AddStudSubMarksDeatils(mydb, cursor, stdID)
         elif choice == 4:
-            stdID = input("Enter Student's Unique ID")
+            stdID = input("Enter Student's Unique ID: ")
             RC(cursor, stdID, userName+teacher_of)
+        elif choice == 5:
+            stuID = input("Enter Student Unique ID: ")
+            delete(mydb, cursor, stdID, userName+teacher_of)
         else:
             print("Logged Out.")
             quit()

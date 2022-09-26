@@ -6,21 +6,21 @@ def AddStudDetails(mycon, cursor, tablename):
     address = input("Enter Student Home Address...")
     motherName = input("Enter Mother's Name: ")
     fatherName = input("Enter Father's Name: ")
-    dob = input("Enter DOB in YYYY/MM/DD: ")
+    dob = input("Enter DOB in YYYY-MM-DD: ")
     try:
-        cursor.execute("use SMS;")
         cursor.execute(
-            f"insert into {tablename} (StdId,StudentName,RollNo,Phone_Number,Address,MotherName,FatherName,DOB) values('{stdID}','{studName}',{rollNo},{phno},'{address}','{motherName}','{fatherName}','{dob}');")
+            f'insert into {tablename} (StdId,StudentName,RollNo,Phone_Number,Address,MotherName,FatherName,DOB) values("{stdID}","{studName}",{rollNo},{phno},"{address}","{motherName}","{fatherName}","{dob}");')
         mycon.commit()
+        print("Added Successfully")
     except:
-        print("Error occured while insert student record....try again later")
+        print("Error occured while inserting student record....try again later")
 
 
 def AddStudSubMarksDeatils(mydb, cursor, stdID):
     try:
-        cursor.execute("create database if not exists SMS_STUDENTS;")
-        mydb.commit()
-        cursor.execute("use SMS_STUDENTS;")
+        # cursor.execute("create database if not exists SMS_STUDENTS;")
+        # mydb.commit()
+        # cursor.execute("use SMS_STUDENTS;")
         cursor.execute(
             f"create table if not exists {stdID} (English double(5,2),Hindi double(5,2),Science double(5,2),SST double(5,2),Maths double(5,2),TestName varchar(10));")
     except:
@@ -36,6 +36,7 @@ def AddStudSubMarksDeatils(mydb, cursor, stdID):
         cursor.execute(
             f"insert into {stdID} values({eng},{hindi},{science},{sst},{maths},'{testname}')")
         mydb.commit()
+        print("Added Successfully")
     except:
         print("Error occured while inserting marks.")
         return

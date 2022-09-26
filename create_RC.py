@@ -1,13 +1,13 @@
 def RC(cursor, stdID, table_name):
     try:
-        cursor.execute("use SMS_STUDENTS;")
+        # cursor.execute("use SMS_STUDENTS;")
         test_name = input(
             "Enter the name of the test for which you wanna display the report card: ")
-        cursor.execute(f"select * from {stdID} where TestName={test_name};")
+        cursor.execute(f"select * from {stdID} where TestName='{test_name}';")
         eng, hindi, science, sst, maths, _ = cursor.fetchall()[0]
-        cursor.execute("use SMS;")
+        # cursor.execute("use SMS;")
         cursor.execute(
-            f"select StudentName,Class,MotherName,FatherName,DOB from {table_name} where StdId={stdID}")
+            f"select StudentName,Class,MotherName,FatherName,DOB from {table_name} where StdId='{stdID}'")
         name, class_, mother_name, father_name, dob = cursor.fetchall()[0]
         longerVal = ''
         if len(name) > len(father_name):

@@ -1,9 +1,9 @@
 def updateStudentMarks(mydb, cursor, stdID):
-    try:
-        cursor.execute("use SMS_STUDENTS;")
-    except:
-        print("Error occured in updating marks..Try again later")
-        return
+    # try:
+    #     cursor.execute("use SMS_STUDENTS;")
+    # except:
+    #     print("Error occured in updating marks..Try again later")
+    #     return
     while True:
         test_name = input(
             "Enter the name of the test of which marks to be changed: ")
@@ -26,8 +26,9 @@ def updateStudentMarks(mydb, cursor, stdID):
         new_value = float(input(f"Enter New Marks of {field}: "))
         try:
             cursor.execute(
-                f"update {stdID} set {field}={new_value} where TestName={test_name};")
+                f"update {stdID} set {field}='{new_value}' where TestName='{test_name}';")
             mydb.commit()
+            print("Updated Successfully...")
         except:
             print("Error encountered while update marks....Try again later")
             break
@@ -57,10 +58,11 @@ def updateStudentDetails(mydb, cursor, searchBy, table_name):
             print("Make proper choice...")
             continue
         try:
-            cursor.execute("use SMS;")
+            # cursor.execute("use SMS;")
             cursor.execute(
-                f"update {table_name} set {field}={new_value} where {searchBy[1]}={searchBy[0]};")
+                f"update {table_name} set {field}='{new_value}' where {searchBy[1]}='{searchBy[0]}';")
             mydb.commit()
+            print("Updated Successfully...")
         except:
             print("Error occured while updating details..Try again later....")
             break
