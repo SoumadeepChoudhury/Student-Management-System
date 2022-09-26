@@ -18,9 +18,6 @@ def AddStudDetails(mycon, cursor, tablename):
 
 def AddStudSubMarksDeatils(mydb, cursor, stdID):
     try:
-        # cursor.execute("create database if not exists SMS_STUDENTS;")
-        # mydb.commit()
-        # cursor.execute("use SMS_STUDENTS;")
         cursor.execute(
             f"create table if not exists {stdID} (English double(5,2),Hindi double(5,2),Science double(5,2),SST double(5,2),Maths double(5,2),TestName varchar(10));")
     except:

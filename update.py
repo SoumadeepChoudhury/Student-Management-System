@@ -1,9 +1,4 @@
 def updateStudentMarks(mydb, cursor, stdID):
-    # try:
-    #     cursor.execute("use SMS_STUDENTS;")
-    # except:
-    #     print("Error occured in updating marks..Try again later")
-    #     return
     while True:
         test_name = input(
             "Enter the name of the test of which marks to be changed: ")
@@ -58,7 +53,6 @@ def updateStudentDetails(mydb, cursor, searchBy, table_name):
             print("Make proper choice...")
             continue
         try:
-            # cursor.execute("use SMS;")
             cursor.execute(
                 f"update {table_name} set {field}='{new_value}' where {searchBy[1]}='{searchBy[0]}';")
             mydb.commit()
